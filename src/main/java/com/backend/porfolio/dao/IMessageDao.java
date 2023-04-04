@@ -1,5 +1,7 @@
 package com.backend.porfolio.dao;
+import org.springframework.data.repository.CrudRepository;
+import com.backend.porfolio.model.Message;
 
-public class IMessageDao extends Crud{
+public interface IMessageDao extends CrudRepository<Message, Long>{
 
 }

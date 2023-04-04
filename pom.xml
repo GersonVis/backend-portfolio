@@ -51,7 +51,12 @@
 			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>com.local.inventory</groupId>
+			<artifactId>Inventory</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+</dependencies>
 	<build>
 		<plugins>
 			<plugin>
