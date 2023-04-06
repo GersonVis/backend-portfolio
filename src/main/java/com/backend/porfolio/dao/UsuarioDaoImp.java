@@ -31,6 +31,17 @@ public class UsuarioDaoImp implements IUsuarioDao{
 		entityManager.remove(usuarioP);		
 	}
 
+	@Override
+	public boolean verificarCredenciales(UsuarioP usuario) {
+		String consulta = "FROM UsuarioP where email = :email and password = :password";
+		return entityManager.createQuery(consulta)
+		.setParameter("email", usuario.getEmail())
+		.setParameter("password", usuario.getPassword())
+		.getResultList().isEmpty();
+		
+		
+	}
+
     
 
 

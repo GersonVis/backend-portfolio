@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface IUsuarioDao {
      List<UsuarioP> getUsuarios();
      void delete(Long id);
+     boolean verificarCredenciales(UsuarioP usuario);
 }
