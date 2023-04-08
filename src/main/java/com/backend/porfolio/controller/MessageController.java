@@ -7,14 +7,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.porfolio.dao.IMessageDao;
 import com.backend.porfolio.model.Message;
+import com.backend.porfolio.model.Model;
+import com.backend.porfolio.model.Recivido;
 import com.backend.porfolio.response.Header;
 import com.backend.porfolio.response.MessageResponseRest;
+import com.backend.porfolio.response.Response;
 import com.local.inventory.model.Product;
 import com.local.inventory.response.ProductResponse;
 
@@ -27,7 +32,7 @@ public class MessageController {
     private IMessageDao messageDao;
     
     @RequestMapping(value="messages", method= RequestMethod.GET)
-    public List<Message> getMessages(){
+    public List<Model> getMessages(){
     	return messageDao.getMessages();
     }
     
@@ -37,6 +42,15 @@ public class MessageController {
     	consulta.setHeader(new Header("consulta", "00", "-1"));
     	consulta.setData(messageDao.getMessages());
     	return new ResponseEntity<MessageResponseRest>(consulta, HttpStatus.ACCEPTED);
+    }
+    
+    @PostMapping("message/insert")
+    public ResponseEntity<Response> insert(@RequestBody Message message){
+    	Response respuesta = new Response();
+    	respuesta.setHeader(new Header("insert", "00", "1"));
+    	respuesta.getData().add(message);
+    	messageDao.insert(message);
+    	return new ResponseEntity<Response>(respuesta, HttpStatus.ACCEPTED);
     }
 }
 

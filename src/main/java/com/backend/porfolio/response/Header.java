@@ -11,8 +11,8 @@ public class Header {
        HashMap<String, String> header = new HashMap<String, String>();
        public Header(String type, String code, String affected){
     	   header.put("type", type);
-    	   header.put("code", type);
-    	   header.put("affected", type);
+    	   header.put("code", code);
+    	   header.put("affected", affected);
        }
        
 }

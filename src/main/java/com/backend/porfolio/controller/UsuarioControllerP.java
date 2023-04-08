@@ -44,6 +44,11 @@ public class UsuarioControllerP implements IUsuarioDao{
 	public void delete(@PathVariable Long id) {
 		usuarioDao.delete(id);
 	}
+	@Override
+	public boolean verificarCredenciales(UsuarioP usuario) {
+		// TODO Auto-generated method stub
+		return false;
+	}
     
 
 

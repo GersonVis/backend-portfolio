@@ -3,7 +3,9 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import com.backend.porfolio.model.Message;
+import com.backend.porfolio.model.Model;
 
 public interface IMessageDao{
-	List<Message> getMessages();
+	List<Model> getMessages();
+	public void insert(Message message);
 }
