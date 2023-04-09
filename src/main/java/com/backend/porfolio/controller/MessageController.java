@@ -1,5 +1,6 @@
 package com.backend.porfolio.controller;
 
+import java.io.IOError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,9 +48,18 @@ public class MessageController {
     @PostMapping("message/insert")
     public ResponseEntity<Response> insert(@RequestBody Message message){
     	Response respuesta = new Response();
-    	respuesta.setHeader(new Header("insert", "00", "1"));
     	respuesta.getData().add(message);
-    	messageDao.insert(message);
+    	respuesta.setHeader(new Header("insert", "00", "1"));
+    	try {
+    		messageDao.insert(message);
+    		
+    	}catch(IOError e) {
+    		return new ResponseEntity<Response>(respuesta, HttpStatus.ACCEPTED);
+    	}
+    	
+    	//if(messageDao.insert(message)) {
+    		respuesta.setHeader(new Header("insert", "-1", "0"));	
+    //	}
     	return new ResponseEntity<Response>(respuesta, HttpStatus.ACCEPTED);
     }
 }

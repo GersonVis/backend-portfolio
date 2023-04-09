@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public class MessageDaoImp implements IMessageDao{
+public class MessageDaoImp implements IMessageDao {
 	@PersistenceContext
 	EntityManager entityManager;
 
@@ -24,11 +24,16 @@ public class MessageDaoImp implements IMessageDao{
 	}
 
 	@Override
-	public void insert(Message message) {
-		String query = "INSERT INTO Message(name, content) values(:name, :content)";
-		entityManager.createNativeQuery(query)
-		.setParameter("name", message.getName())
-		.setParameter("content", message.getContent()).executeUpdate();
+	public boolean insert(Message message) {
+
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.persist(message);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

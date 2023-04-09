@@ -7,5 +7,5 @@ import com.backend.porfolio.model.Model;
 
 public interface IMessageDao{
 	List<Model> getMessages();
-	public void insert(Message message);
+	public boolean insert(Message message);
 }

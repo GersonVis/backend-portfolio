@@ -14,5 +14,9 @@ public class Header {
     	   header.put("code", code);
     	   header.put("affected", affected);
        }
-       
+       public Header(String type, String code, String affected, String error){
+    	   header.put("type", type);
+    	   header.put("code", code);
+    	   header.put("affected", affected);
+       }
 }
