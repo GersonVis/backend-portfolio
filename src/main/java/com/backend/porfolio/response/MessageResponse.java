@@ -8,6 +8,6 @@ import ch.qos.logback.core.model.Model;
 import lombok.Data;
 
 @Data
-public class MessageResponse {
-      List<Model> data;
+public class MessageResponse extends Response{
+      List<Message> data;
 }

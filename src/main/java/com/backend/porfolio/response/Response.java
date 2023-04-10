@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Response {
 	   HashMap<String, String> header = new HashMap<String, String>();
 	  
-	   List<Model> data=new ArrayList<Model>();
+	//   List<Object> data=new ArrayList<>();
 	   
        public void setHeader(Header header) {
     	   this.header=header.getHeader();

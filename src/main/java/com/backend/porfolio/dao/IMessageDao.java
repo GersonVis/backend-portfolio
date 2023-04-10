@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.backend.porfolio.model.Message;
 import com.backend.porfolio.model.Model;
 
-public interface IMessageDao{
-	List<Model> getMessages();
-	public boolean insert(Message message);
+public interface IMessageDao extends CrudRepository<Message, Long>{
+
 }

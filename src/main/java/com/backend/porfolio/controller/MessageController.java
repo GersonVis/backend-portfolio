@@ -1,10 +1,14 @@
 package com.backend.porfolio.controller;
 
+
+
+
 import java.io.IOError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.helpers.CheckReturnValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,46 +25,39 @@ import com.backend.porfolio.model.Recivido;
 import com.backend.porfolio.response.Header;
 import com.backend.porfolio.response.MessageResponseRest;
 import com.backend.porfolio.response.Response;
+import com.backend.porfolio.services.IMessageService;
 import com.local.inventory.model.Product;
 import com.local.inventory.response.ProductResponse;
 
+import jakarta.persistence.EntityExistsException;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 @RestController
 public class MessageController {
     @Autowired
-    private IMessageDao messageDao;
+    private IMessageService messageService;
     
     @RequestMapping(value="messages", method= RequestMethod.GET)
-    public List<Model> getMessages(){
-    	return messageDao.getMessages();
+    public ResponseEntity<MessageResponseRest> getMessages(){
+    	MessageResponseRest consulta=new MessageResponseRest();
+    	consulta.setHeader(new Header("consulta", "00", "-1"));
+    	consulta.setData(messageService.getMessages());
+    	return new ResponseEntity<MessageResponseRest>(consulta, HttpStatus.ACCEPTED);
+    //	return messageService.getMessages();
     }
     
-    @RequestMapping(value="prueba", method = RequestMethod.GET)
+ /*   @RequestMapping(value="prueba", method = RequestMethod.GET)
     public ResponseEntity<MessageResponseRest> prueba(){
     	MessageResponseRest consulta=new MessageResponseRest();
     	consulta.setHeader(new Header("consulta", "00", "-1"));
-    	consulta.setData(messageDao.getMessages());
+    	consulta.setData(messageService.getMessages());
     	return new ResponseEntity<MessageResponseRest>(consulta, HttpStatus.ACCEPTED);
-    }
-    
+    }*/
+
     @PostMapping("message/insert")
-    public ResponseEntity<Response> insert(@RequestBody Message message){
-    	Response respuesta = new Response();
-    	respuesta.getData().add(message);
-    	respuesta.setHeader(new Header("insert", "00", "1"));
-    	try {
-    		messageDao.insert(message);
-    		
-    	}catch(IOError e) {
-    		return new ResponseEntity<Response>(respuesta, HttpStatus.ACCEPTED);
-    	}
-    	
-    	//if(messageDao.insert(message)) {
-    		respuesta.setHeader(new Header("insert", "-1", "0"));	
-    //	}
-    	return new ResponseEntity<Response>(respuesta, HttpStatus.ACCEPTED);
+    public ResponseEntity<MessageResponseRest> insert(@RequestBody Message message){
+    	return messageService.save(message);
     }
 }
 
