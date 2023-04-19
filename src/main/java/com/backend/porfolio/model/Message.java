@@ -15,6 +15,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -23,7 +24,7 @@ import lombok.NonNull;
 
 @Data
 @Entity
-@Table(name = "message")
+@Table(name = "messages")
 public class Message implements Serializable, Model {
 	/**
 	* 
@@ -33,15 +34,11 @@ public class Message implements Serializable, Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String content;
+
+	private String message;
  
-	
-	
 	@CreationTimestamp
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
     private Calendar messagedate;
-
-
 }

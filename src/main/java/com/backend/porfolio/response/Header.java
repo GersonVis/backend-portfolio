@@ -8,15 +8,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Header {
-       HashMap<String, String> header = new HashMap<String, String>();
-       public Header(String type, String code, String affected){
+       HashMap<String, Object> header = new HashMap<String, Object>();
+       /**  
+        * @param type
+        * @param code
+        * @param num_registers
+        * @param state
+        */
+       public Header(String type, String code, String num_registers, boolean state){
     	   header.put("type", type);
     	   header.put("code", code);
-    	   header.put("affected", affected);
+    	   header.put("size", num_registers);
+    	   header.put("state", state);
        }
-       public Header(String type, String code, String affected, String error){
-    	   header.put("type", type);
-    	   header.put("code", code);
-    	   header.put("affected", affected);
-       }
+   
 }

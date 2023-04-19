@@ -24,9 +24,12 @@ public class MessageService implements IMessageService {
 	IMessageDao messageDao;
 
 	@Override
-	public List<Message> getMessages() {
+	public ResponseEntity<MessageResponseRest> getMessages() {
 		List<Message> result =(List<Message>) messageDao.findAll();
-		return  result;
+		MessageResponseRest response = new MessageResponseRest();
+		response.setData(result);
+		response.setHeader(new Header("select", "1", String.valueOf(result.size()), true));
+		return  new ResponseEntity<MessageResponseRest>(response, HttpStatus.ACCEPTED);
 	}
 
 	
@@ -36,9 +39,9 @@ public class MessageService implements IMessageService {
 		ArrayList<Message> list=new ArrayList<Message>();
 		list.add(message);
     	respuesta.setData(list);
-    	respuesta.setHeader(new Header("insert", "1", "1"));
+    	respuesta.setHeader(new Header("insert", "1", "1", true));
     	if(!(messageDao.save(message)!=null)){
-    		respuesta.setHeader(new Header("insert", "-1", "0"));
+    		respuesta.setHeader(new Header("insert", "-1", "0", false));
     	}
     	return new ResponseEntity<MessageResponseRest>(respuesta, HttpStatus.ACCEPTED);
 	}

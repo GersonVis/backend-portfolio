@@ -13,14 +13,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Response {
-	   HashMap<String, String> header = new HashMap<String, String>();
+	   HashMap<String, Object> header = new HashMap<String, Object>();
 	  
 	//   List<Object> data=new ArrayList<>();
 	   
        public void setHeader(Header header) {
     	   this.header=header.getHeader();
        }
-       public HashMap<String, String> getHeader() {
+       public HashMap<String, Object> getHeader() {
     	   return header;
        }
 }
