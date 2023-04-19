@@ -8,5 +8,5 @@ import lombok.Data;
 
 @Data
 public class UserMessageResponse extends Response{
-	 List<UserMessage> list;
+	 List<UserMessage> data;
 }

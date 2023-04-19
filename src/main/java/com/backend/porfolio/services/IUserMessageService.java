@@ -6,6 +6,6 @@ import com.backend.porfolio.model.UserMessage;
 import com.backend.porfolio.response.UserMessageResponseRest;
 
 public interface IUserMessageService {
-     // ResponseEntity<UserMessageResponseRest> save(UserMessage userMessage);
+      ResponseEntity<UserMessageResponseRest> save(UserMessage userMessage);
       String test();
 }

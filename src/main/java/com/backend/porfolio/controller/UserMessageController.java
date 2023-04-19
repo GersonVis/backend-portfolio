@@ -19,15 +19,16 @@ public class UserMessageController {
 	@Autowired
 	private IUserMessageService userMessageService;
 	
-	/*@RequestMapping(value = "usermessage/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "usermessage/insert", method = RequestMethod.POST)
 	public ResponseEntity<UserMessageResponseRest> save(@RequestBody UserMessage userMessage){
 		//return userMessageService.save(userMessage);
+		
 		return null;
-	}*/
+	}
 	
 	@RequestMapping(value = "usermessage/test", method = RequestMethod.POST)
-	public String test(@RequestBody UserMessage userMessage) {
-		//userMessageService.save(userMessage);
-		return "found";
+	public ResponseEntity<UserMessageResponseRest> test(@RequestBody UserMessage userMessage) {
+		return userMessageService.save(userMessage);
+	//	return "found";
 	}
 }

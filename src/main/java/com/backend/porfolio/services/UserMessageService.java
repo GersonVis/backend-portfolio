@@ -2,6 +2,7 @@ package com.backend.porfolio.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class UserMessageService implements IUserMessageService{
 	@Autowired
 	IUserMessageDao userMessageDao;
 	
-	/*@Override
+	@Override
 	public ResponseEntity<UserMessageResponseRest> save(UserMessage userMessage) {
 		UserMessageResponseRest userMessageResponseRest = new UserMessageResponseRest();
 		UserMessage newUserMessage = userMessageDao.save(userMessage);
@@ -35,12 +36,13 @@ public class UserMessageService implements IUserMessageService{
 			userMessageResponseRest.setHeader(new Header("insert", "0", "0", false));
 			return new ResponseEntity<UserMessageResponseRest>(userMessageResponseRest, HttpStatus.BAD_REQUEST);
 		}
-		//ArrayList<UserMessage> list =  (ArrayList<UserMessage>) Arrays.asList(newUserMessage);
-		//userMessageResponseRest.setList(list);
+		List<UserMessage> list =  new ArrayList<UserMessage>();
+		list.add(newUserMessage);
+		userMessageResponseRest.setData(list);
 		userMessageResponseRest.setHeader(new Header("insert", "1", "1", true));
 		return new ResponseEntity<UserMessageResponseRest>(userMessageResponseRest, HttpStatus.ACCEPTED);
-		return null;
-	}*/
+	//	return null;
+	}
 
 	@Override
 	public String test() {

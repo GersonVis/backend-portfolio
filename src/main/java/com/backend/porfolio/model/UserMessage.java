@@ -24,13 +24,12 @@ public class UserMessage implements Serializable{/**
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long user_message_id;
 	
-	/*@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user_send;
 	
 
 	@OneToOne(fetch = FetchType.LAZY)
-	private User user_recv; */
+	private User user_recv;
 	
 	
 	@OneToOne(fetch = FetchType.LAZY)
